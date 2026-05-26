@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MenuIcon, SearchIcon } from "lucide-react";
+import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import { Geist, Geist_Mono, Inter, Chivo, Roboto } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -14,6 +15,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { Field } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const tiemposHeadline = localFont({
   src: [
@@ -251,7 +255,7 @@ export default function RootLayout({
               Designed and Developed by Digital Development 2025–2026
             </p>
           </section>
-          <section className="flex flex-nowrap gap-8">
+          <section className="flex flex-wrap gap-8">
             <ul>
               <li>
                 <p className="font-bold">Browse</p>
@@ -324,11 +328,34 @@ export default function RootLayout({
             </ul>
           </section>
           <section>
-            <section>
+            <section className="border-white border-b mb-3">
               <p>Like reading the GUIDON? Subscribe to our newsletter</p>
+              <section
+                className={`flex flex-nowrap items-stretch mt-2 mb-5 h-[2.5em] ${chivo.className}`}
+              >
+                <Field className="grow">
+                  <Input
+                    id="email"
+                    type="email"
+                    className="border-0 bg-white text-[#898989] h-full"
+                    placeholder="Email"
+                  />
+                </Field>
+                <Button
+                  variant="default"
+                  className="w-1/3 p-0 m-0 h-full border-0 font-semibold text-md bg-[#6A91CD]"
+                >
+                  Subscribe
+                </Button>
+              </section>
             </section>
             <section>
               <p>Follow The GUIDON on:</p>
+              <section className="flex flex-nowrap gap-4 mt-2 text-2xl">
+                <FaFacebook color="white" />
+                <FaXTwitter color="white" />
+                <FaInstagram color="white" />
+              </section>
             </section>
           </section>
         </footer>
