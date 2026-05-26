@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HamburgerIcon, SearchIcon } from "lucide-react";
+import { MenuIcon, SearchIcon } from "lucide-react";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
@@ -41,32 +41,40 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <header>
-          <section>
-            <HamburgerIcon />
-            <Image src="/GUIDON_Logo.svg" alt="The GUIDON" />
+        <header className="w-full h-[116px] py-4 px-12 bg-[#1c4480] text-white">
+          <section className="w-full flex flex-nowrap justify-between items-center h-min">
+            <MenuIcon />
+            <Image
+              src="/GUIDON_Logo.svg"
+              width={320}
+              height={50}
+              alt="The GUIDON"
+            />
             <SearchIcon />
           </section>
         </header>
         {children}
-        <footer>
+        <footer className="w-full grid grid-cols-3 grid-rows-1 justify-items-center gap-16 pb-8 pt-12 px-12 bg-[#1c4480] text-white">
           <section>
-            <section>
-              <Image src="/GUIDON_Logo.svg" alt="The GUIDON" />
-              <p>
+            <section className="w-full pb-4 border-white border-b">
+              <Image
+                src="/GUIDON_Logo.svg"
+                width={360}
+                height={50}
+                alt="The GUIDON"
+              />
+              <p className="pt-3">
                 The GUIDON is the official student publication of the Ateneo de
                 Manila University.
               </p>
             </section>
-            <section>
-              <p>
-                © 2026 The GUIDON All Rights Reserved
-                <br />
-                Designed and Developed by Digital Development 2025–2026
-              </p>
-            </section>
+            <p className="w-full pt-5">
+              © 2026 The GUIDON All Rights Reserved
+              <br />
+              Designed and Developed by Digital Development 2025–2026
+            </p>
           </section>
-          <section>
+          <section className="flex flex-nowrap gap-8">
             <ul>
               <li>
                 <p>Browse</p>
