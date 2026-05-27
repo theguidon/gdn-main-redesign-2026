@@ -30,6 +30,11 @@ export function bylinesToP(authors: string[]) {
   }
 }
 
+export function printTwoDigit(num: number) {
+  if (num < 10) return "0" + num;
+  return num.toString();
+}
+
 export function formatDate(date: Date) {
   const dateString = dayjs(date).format("MMMM D YYYY");
   const timeString = dayjs(date).format("H:mm A");
