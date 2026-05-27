@@ -7,7 +7,7 @@ import styles from "../styles/article.module.css";
 import ArticleCard from "@/components/article-card";
 import { Article } from "@/lib/types";
 import { Spinner } from "@/components/ui/spinner";
-import { formatDate } from "@/lib/utils";
+import { bylinesToP, formatDate } from "@/lib/utils";
 
 function OtherArticleSection({
   title,
@@ -47,7 +47,16 @@ interface WPResponse {
   featured_image_url: string;
   date: string;
   excerpt: { rendered: string; [excerpt_k: string]: unknown };
-  yoast_head_json: { og_description: string; [yoast_k: string]: unknown };
+  yoast_head_json: {
+    og_description: string;
+    schema: {
+      "@graph": {
+        2: { caption: string; [graph_k: string]: unknown };
+      };
+      [schema_k: string]: unknown;
+    };
+    [yoast_k: string]: unknown;
+  };
   [res_k: string]: unknown;
 }
 
@@ -104,12 +113,19 @@ export default function ArticlePage() {
           </h1>
           <section className="flex justify-between mt-3">
             <section>
-              <p className="p-0 m-0">
-                By{" "}
-                <a href="" className="font-bold text-[#1c4480]">
-                  {articleData.authors[0].display_name}
-                </a>{" "}
-              </p>
+              <p
+                className="p-0 m-0"
+                dangerouslySetInnerHTML={{
+                  __html: bylinesToP(
+                    articleData.authors.map(
+                      (author: {
+                        display_name: string;
+                        [ak: string]: unknown;
+                      }) => author.display_name,
+                    ),
+                  ),
+                }}
+              />
               <p
                 className="p-0 m-0 text-[#4c4c4e]"
                 dangerouslySetInnerHTML={{
@@ -140,7 +156,12 @@ export default function ArticlePage() {
             alt="Article image"
           />
           <p className="text-[#4c4c4e] mt-1">
-            Photo by <span className="font-bold">RJ Hernandez</span>
+            Photo by{" "}
+            <span className="font-bold">
+              {articleData.yoast_head_json.schema["@graph"][2].caption.slice(
+                "Photo by ".length,
+              )}
+            </span>
           </p>
         </section>
         <section
@@ -159,6 +180,8 @@ export default function ArticlePage() {
               excerpt: article.yoast_head_json.og_description,
               authors: article.authors.map((author) => author.display_name),
               featured_image_url: article.featured_image_url,
+              featured_image_caption:
+                article.yoast_head_json.schema["@graph"][2].caption,
             }))}
             isLoading={isRelatedArticlesLoading}
           />
@@ -175,6 +198,8 @@ export default function ArticlePage() {
               excerpt: article.yoast_head_json.og_description,
               authors: article.authors.map((author) => author.display_name),
               featured_image_url: article.featured_image_url,
+              featured_image_caption:
+                article.yoast_head_json.schema["@graph"][2].caption,
             }))}
             isLoading={isOtherArticlesLoading}
           />
