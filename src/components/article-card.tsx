@@ -1,6 +1,15 @@
+import { bylinesToP } from "@/lib/utils";
 import Image from "next/image";
 
-export default function ArticleCard() {
+export default function ArticleCard({
+  title,
+  authors,
+  excerpt,
+}: {
+  title: string;
+  authors: string[];
+  excerpt: string;
+}) {
   return (
     <article className="w-full font-sans">
       <section></section>
@@ -13,18 +22,13 @@ export default function ArticleCard() {
       />
       <section>
         <h2 className="font-tiempos-headline text-2xl font-bold mb-5">
-          AEWU-Ateneo tensions deepen due to longstanding labor disputes
+          {title}
         </h2>
-        <p className="uppercase text-sm my-4">
-          By <span className="font-bold text-[#1c4480]">Roi Manimtim</span> and{" "}
-          <span className="font-bold text-[#1c4480]">Andie Manlusoc</span>
-        </p>
-        <p className="text-sm text-[#4c4c4e]">
-          WITH THE labor dispute between the Ateneo Employees and Workers’ Union
-          (AEWU) and the University administration still unresolved, the
-          Department of Labor and Employment (DOLE) assumed jurisdiction over
-          the case on December 1, 2025.
-        </p>
+        <p
+          className="uppercase text-sm my-4"
+          dangerouslySetInnerHTML={{ __html: bylinesToP(authors) }}
+        />
+        <p className="text-sm text-[#4c4c4e]">{excerpt}</p>
         <p className="text-[#4c4c4e] mt-6 uppercase font-bold">
           February 26, 2026, 7:00 PM
         </p>
