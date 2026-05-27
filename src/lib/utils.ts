@@ -31,5 +31,13 @@ export function bylinesToP(authors: string[]) {
 }
 
 export function formatDate(date: Date) {
-  return dayjs(date).format("MMMM D YYYY, H:mm A");
+  const dateString = dayjs(date).format("MMMM D YYYY");
+  const timeString = dayjs(date).format("H:mm A");
+  return (
+    "Published <span class='font-bold'>" +
+    dateString +
+    "</span> at <span class='font-bold'>" +
+    timeString +
+    "</span>"
+  );
 }
