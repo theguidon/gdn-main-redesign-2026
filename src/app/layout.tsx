@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 import { MenuIcon, SearchIcon } from "lucide-react";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
-import { roboto, chivo, tiemposHeadline } from "./fonts";
+import {
+  roboto,
+  chivo,
+  tiemposHeadline,
+  tiemposText,
+  tiemposFine,
+} from "./fonts";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -43,6 +49,8 @@ export default function RootLayout({
         "font-sans",
         chivo.variable,
         tiemposHeadline.variable,
+        tiemposText.variable,
+        tiemposFine.variable,
         roboto.variable,
       )}
     >
