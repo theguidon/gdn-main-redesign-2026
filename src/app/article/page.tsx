@@ -7,6 +7,7 @@ import styles from "../styles/article.module.css";
 import ArticleCard from "@/components/article-card";
 import { Article } from "@/lib/types";
 import { Spinner } from "@/components/ui/spinner";
+import { formatDate } from "@/lib/utils";
 
 function OtherArticleSection({
   title,
@@ -44,6 +45,7 @@ interface WPResponse {
   title: { rendered: string };
   authors: { display_name: string; [author_k: string]: unknown }[];
   featured_image_url: string;
+  date: string;
   excerpt: { rendered: string; [excerpt_k: string]: unknown };
   yoast_head_json: { og_description: string; [yoast_k: string]: unknown };
   [res_k: string]: unknown;
@@ -108,10 +110,12 @@ export default function ArticlePage() {
                   {articleData.authors[0].display_name}
                 </a>{" "}
               </p>
-              <p className="p-0 m-0 text-[#4c4c4e]">
-                Published <span className="font-bold">February 26, 2026</span>{" "}
-                at <span className="font-bold">7:00 PM</span>
-              </p>
+              <p
+                className="p-0 m-0 text-[#4c4c4e]"
+                dangerouslySetInnerHTML={{
+                  __html: formatDate(new Date(articleData.date)),
+                }}
+              />
             </section>
             <section className="flex items-center gap-2">
               <p>Share to: </p>
@@ -151,6 +155,7 @@ export default function ArticlePage() {
             articles={relatedArticles.map((article: WPResponse) => ({
               id: article.id,
               title: article.title.rendered,
+              pubDate: new Date(article.date),
               excerpt: article.yoast_head_json.og_description,
               authors: article.authors.map((author) => author.display_name),
               featured_image_url: article.featured_image_url,
@@ -166,6 +171,7 @@ export default function ArticlePage() {
             articles={otherArticles.map((article: WPResponse) => ({
               id: article.id,
               title: article.title.rendered,
+              pubDate: new Date(article.date),
               excerpt: article.yoast_head_json.og_description,
               authors: article.authors.map((author) => author.display_name),
               featured_image_url: article.featured_image_url,
