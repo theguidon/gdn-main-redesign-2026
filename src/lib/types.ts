@@ -10,3 +10,14 @@ export interface Article {
   categories: string[];
   [key: string]: unknown;
 }
+
+export type ArticleSummary = Omit<Article, "content">;
+export enum Sections {
+  NEWS,
+  OPINION,
+  SPORTS,
+  BEYONDLOYOLA,
+  FEATURES,
+  INQUIRY,
+  SCITECH,
+}
