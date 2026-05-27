@@ -1,0 +1,14 @@
+.articleSection p {
+  font-family: var(--font-tiempos-headline);
+  font-size: 1rem;
+}
+
+.articleSection img {
+  width: 100%;
+}
+
+.articleSection h2 {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
