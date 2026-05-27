@@ -1,14 +1,33 @@
 import Image from "next/image";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import styles from "../styles/article.module.css";
+import ArticleCard from "@/components/article-card";
+
+function OtherArticleSection() {
+  return (
+    <section className="mb-8">
+      <div className="flex flex-row items-center">
+        <h3 className="font-chivo mr-2 font-bold text-[#101212]">
+          From Other Staffs
+        </h3>
+        <div className="h-0 border-black border-b grow" />
+      </div>
+      <section className="flex w-full overflow-x-scroll columns-[30vw] gap-4">
+        <ArticleCard />
+        <ArticleCard />
+        <ArticleCard />
+      </section>
+    </section>
+  );
+}
 
 export default function ArticlePage() {
   const rawHTML = `<p>Your raw HTML here</p>`;
 
   return (
-    <main className="flex flex-col flex-nowrap items-center py-8">
+    <main className="flex flex-col flex-nowrap items-stretch py-8 px-[20%]">
       <section></section>
-      <section className="pb-4 pt-6 border-y border-black flex flex-col w-3/5">
+      <section className="pb-4 pt-6 border-y border-black flex flex-col">
         <h1 className="font-tiempos-headline text-5xl font-bold text-[#101212]">
           Ateneo honors 40 years of People Power, urges continued faith in
           action
@@ -44,7 +63,7 @@ export default function ArticlePage() {
           </section>
         </section>
       </section>
-      <section className="w-3/5 flex flex-col flex-nowrap items-stretch mt-4">
+      <section className="flex flex-col flex-nowrap items-stretch mt-4">
         <Image
           src="https://picsum.photos/800/450"
           width={800}
@@ -57,9 +76,11 @@ export default function ArticlePage() {
         </p>
       </section>
       <section
-        className={`w-3/5 mt-4 ${styles.articleSection}`}
+        className={`my-4 ${styles.articleSection}`}
         dangerouslySetInnerHTML={{ __html: rawHTML }}
       />
+      <OtherArticleSection />
+      <OtherArticleSection />
     </main>
   );
 }
