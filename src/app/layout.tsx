@@ -156,7 +156,7 @@ export default function RootLayout({
             />
             <SearchIcon />
           </section>
-          <NavigationMenu className="mt-2">
+          <NavigationMenu className="mt-2 hidden md:block">
             <NavigationMenuList>
               <NavigationMenuItem>
                 <NavigationMenuLink href="/" className={menuNoHighlight}>
@@ -235,9 +235,9 @@ export default function RootLayout({
           </NavigationMenu>
         </header>
         {children}
-        <footer className="w-full grid grid-cols-3 grid-rows-1 justify-items-center gap-16 pb-8 pt-12 px-12 bg-[#1c4480] text-white">
+        <footer className="w-full flex flex-col items-stretch md:grid md:grid-cols-3 md:grid-rows-1 justify-items-center md:gap-4 lg:gap-16 pb-8 pt-12 px-6 md:px-8 lg:px-12 bg-[#1c4480] text-white">
           <section>
-            <section className="w-full pb-4 border-white border-b">
+            <section className="w-full pb-4 border-white border-b mb-4 md:mb-0">
               <Image
                 src="/GUIDON_Logo.svg"
                 width={360}
@@ -249,13 +249,13 @@ export default function RootLayout({
                 Manila University.
               </p>
             </section>
-            <p className="w-full pt-5">
+            <p className="w-full pt-5 hidden md:block">
               © 2026 The GUIDON All Rights Reserved
               <br />
               Designed and Developed by Digital Development 2025–2026
             </p>
           </section>
-          <section className="flex flex-wrap gap-8">
+          <section className="flex flex-wrap gap-8 mb-4 md:mb-0 border-white border-b pb-2 md:p-0 md:border-none">
             <ul>
               <li>
                 <p className="font-bold">Browse</p>
@@ -327,7 +327,7 @@ export default function RootLayout({
               </li>
             </ul>
           </section>
-          <section>
+          <section className="pb-4 mb-4 border-white border-b md:pb-0 md:mb-0 md:border-none">
             <section className="border-white border-b mb-3">
               <p>Like reading the GUIDON? Subscribe to our newsletter</p>
               <section
@@ -352,12 +352,23 @@ export default function RootLayout({
             <section>
               <p>Follow The GUIDON on:</p>
               <section className="flex flex-nowrap gap-4 mt-2 text-2xl">
-                <FaFacebook color="white" />
-                <FaXTwitter color="white" />
-                <FaInstagram color="white" />
+                <a href="www.facebook.com/TheGUIDON">
+                  <FaFacebook color="white" />
+                </a>
+                <a href="www.twitter.com/TheGUIDON">
+                  <FaXTwitter color="white" />
+                </a>
+                <a href="www.instagram.com/TheGUIDON">
+                  <FaInstagram color="white" />
+                </a>
               </section>
             </section>
           </section>
+          <p className="w-full pt-2 block md:hidden">
+            © 2026 The GUIDON All Rights Reserved
+            <br />
+            Designed and Developed by Digital Development 2025–2026
+          </p>
         </footer>
       </body>
     </html>
