@@ -5,22 +5,35 @@ import useSWR from "swr";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import styles from "../styles/article.module.css";
 import ArticleCard from "@/components/article-card";
+import { Article } from "@/lib/types";
 import { Spinner } from "@/components/ui/spinner";
 
-function OtherArticleSection({ title, articles }) {
+function OtherArticleSection({
+  title,
+  articles,
+  isLoading,
+}: {
+  title: string;
+  articles: Article[];
+  isLoading: boolean;
+}) {
   return (
     <section className="mb-8">
       <div className="flex flex-row items-center">
-        <h3 className="font-chivo mr-2 font-bold text-[#101212]">
-          From Other Staffs
-        </h3>
+        <h3 className="font-chivo mr-2 font-bold text-[#101212]">{title}</h3>
         <div className="h-0 border-black border-b grow" />
       </div>
-      <section className="flex w-full overflow-x-scroll columns-[30vw] gap-4">
-        <ArticleCard />
-        <ArticleCard />
-        <ArticleCard />
-      </section>
+      {isLoading ? (
+        <section className="w-full h-20 flex items-center justify-center">
+          <Spinner />
+        </section>
+      ) : (
+        <section className="flex w-full overflow-x-scroll columns-[30vw] gap-4">
+          {articles.map((article: Article) => (
+            <ArticleCard key={article.id} article={article} />
+          ))}
+        </section>
+      )}
     </section>
   );
 }
@@ -31,14 +44,19 @@ interface WPResponse {
   title: { rendered: string };
   authors: { display_name: string; [author_k: string]: unknown }[];
   featured_image_url: string;
+  excerpt: { rendered: string; [excerpt_k: string]: unknown };
+  yoast_head_json: { og_description: string; [yoast_k: string]: unknown };
   [res_k: string]: unknown;
 }
 
 export default function ArticlePage() {
   const BASE_URL = "https://theguidon.com/wp-json/wp/v2";
   const testUrl = "https://theguidon.com/wp-json/wp/v2/posts/51809";
-  const { data, error, isLoading } = useSWR(testUrl, fetcher);
-  const categories = data.categories as number[];
+  const {
+    data: articleData,
+    error: articleError,
+    isLoading: isArticleLoading,
+  } = useSWR(testUrl, fetcher);
   // Uses the same implementation as from the 2022 theme
   // Gets posts in the same category as the article
   // (if there are multiple categories, they get the first)
@@ -47,7 +65,8 @@ export default function ArticlePage() {
     error: relatedArticlesError,
     isLoading: isRelatedArticlesLoading,
   } = useSWR(
-    `${BASE_URL}/posts?categories=${categories[0]}&exclude=${data.id}&per_page=3`,
+    () =>
+      `${BASE_URL}/posts?categories=${articleData ? articleData.categories[0] : "0"}&exclude=${articleData.id}&per_page=3`,
     fetcher,
   );
 
@@ -56,18 +75,22 @@ export default function ArticlePage() {
     error: otherArticlesError,
     isLoading: isOtherArticlesLoading,
   } = useSWR(
-    `${BASE_URL}/posts?categories_exclude=${categories.join(",")}&per_page=3`,
+    () =>
+      `${BASE_URL}/posts?categories_exclude=${articleData ? articleData.categories.join(",") : "0"}&per_page=3`,
+    fetcher,
   );
   const rawHTML =
-    !data || error ? `<p>Your raw HTML here</p>` : data.content.rendered;
+    !articleData || isArticleLoading
+      ? `<p>Your raw HTML here</p>`
+      : articleData.content.rendered;
 
-  if (isLoading) {
+  if (isArticleLoading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">
         <Spinner />
       </div>
     );
-  } else if (error) {
+  } else if (articleError) {
     return <p>We failed to retrieve your article.</p>;
   } else {
     return (
@@ -75,14 +98,14 @@ export default function ArticlePage() {
         <section></section>
         <section className="pb-4 pt-6 border-y border-black flex flex-col">
           <h1 className="font-tiempos-headline text-5xl font-bold text-[#101212]">
-            {data.title.rendered}
+            {articleData.title.rendered}
           </h1>
           <section className="flex justify-between mt-3">
             <section>
               <p className="p-0 m-0">
                 By{" "}
                 <a href="" className="font-bold text-[#1c4480]">
-                  {data.authors[0].display_name}
+                  {articleData.authors[0].display_name}
                 </a>{" "}
               </p>
               <p className="p-0 m-0 text-[#4c4c4e]">
@@ -106,7 +129,7 @@ export default function ArticlePage() {
         </section>
         <section className="flex flex-col flex-nowrap items-stretch mt-4 border-black border-b pb-4 mb-8">
           <Image
-            src={data.featured_image_url}
+            src={articleData.featured_image_url}
             width={1000}
             height={550}
             className="w-full"
@@ -120,8 +143,36 @@ export default function ArticlePage() {
           className={`my-4 ${styles.articleSection}`}
           dangerouslySetInnerHTML={{ __html: rawHTML }}
         />
-        <OtherArticleSection />
-        <OtherArticleSection />
+        {!relatedArticles ? (
+          <p>Loading...</p>
+        ) : (
+          <OtherArticleSection
+            title="Related Articles"
+            articles={relatedArticles.map((article: WPResponse) => ({
+              id: article.id,
+              title: article.title.rendered,
+              excerpt: article.yoast_head_json.og_description,
+              authors: article.authors.map((author) => author.display_name),
+              featured_image_url: article.featured_image_url,
+            }))}
+            isLoading={isRelatedArticlesLoading}
+          />
+        )}
+        {!otherArticles ? (
+          <p>Loading...</p>
+        ) : (
+          <OtherArticleSection
+            title="From Other Staffs"
+            articles={otherArticles.map((article: WPResponse) => ({
+              id: article.id,
+              title: article.title.rendered,
+              excerpt: article.yoast_head_json.og_description,
+              authors: article.authors.map((author) => author.display_name),
+              featured_image_url: article.featured_image_url,
+            }))}
+            isLoading={isOtherArticlesLoading}
+          />
+        )}
       </main>
     );
   }
