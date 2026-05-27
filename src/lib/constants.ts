@@ -1,34 +1,45 @@
-import { Sections } from "./types";
+import { Section } from "./types";
 
-const sectionInfo = {
-  NEWS: {
+type SectionInfo = {
+  name: string;
+  slug: string;
+  color: string;
+};
+
+export const sectionInfo: Record<Section, SectionInfo> = {
+  [Section.NEWS]: {
     name: "News",
     slug: "news",
     color: "--gdn-blue",
   },
-  OPINION: {
+  [Section.OPINION]: {
     name: "Opinion",
     slug: "opinion",
     color: "--opinion-gray",
   },
-  SPORTS: {
+  [Section.SPORTS]: {
     name: "Sports",
     slug: "sports",
     color: "--gdn-blue",
   },
-  BEYONDLOYOLA: {
+  [Section.BEYONDLOYOLA]: {
     name: "Beyond Loyola",
     slug: "bl",
     color: "--bl-yellow",
   },
-  FEATURES: {
+  [Section.FEATURES]: {
     name: "Features",
     slug: "features",
     color: "--features-green",
   },
-  INQUIRY: {
+  [Section.INQUIRY]: {
     name: "Inquiry",
     slug: "inquiry",
     color: "--inquiry-red",
+  },
+  [Section.SCITECH]: {
+    name: "Science and Technology",
+    slug: "scitech",
+    color: "--scitech-blue",
   },
 };
