@@ -7,7 +7,7 @@ import styles from "../styles/article.module.css";
 import ArticleCard from "@/components/article-card";
 import { Spinner } from "@/components/ui/spinner";
 
-function OtherArticleSection() {
+function OtherArticleSection({ title, articles }) {
   return (
     <section className="mb-8">
       <div className="flex flex-row items-center">
@@ -35,8 +35,29 @@ interface WPResponse {
 }
 
 export default function ArticlePage() {
-  const testUrl = "https://theguidon.com/wp-json/wp/v2/posts/51818";
+  const BASE_URL = "https://theguidon.com/wp-json/wp/v2";
+  const testUrl = "https://theguidon.com/wp-json/wp/v2/posts/51809";
   const { data, error, isLoading } = useSWR(testUrl, fetcher);
+  const categories = data.categories as number[];
+  // Uses the same implementation as from the 2022 theme
+  // Gets posts in the same category as the article
+  // (if there are multiple categories, they get the first)
+  const {
+    data: relatedArticles,
+    error: relatedArticlesError,
+    isLoading: isRelatedArticlesLoading,
+  } = useSWR(
+    `${BASE_URL}/posts?categories=${categories[0]}&exclude=${data.id}&per_page=3`,
+    fetcher,
+  );
+
+  const {
+    data: otherArticles,
+    error: otherArticlesError,
+    isLoading: isOtherArticlesLoading,
+  } = useSWR(
+    `${BASE_URL}/posts?categories_exclude=${categories.join(",")}&per_page=3`,
+  );
   const rawHTML =
     !data || error ? `<p>Your raw HTML here</p>` : data.content.rendered;
 
@@ -86,8 +107,8 @@ export default function ArticlePage() {
         <section className="flex flex-col flex-nowrap items-stretch mt-4 border-black border-b pb-4 mb-8">
           <Image
             src={data.featured_image_url}
-            width={800}
-            height={450}
+            width={1000}
+            height={550}
             className="w-full"
             alt="Article image"
           />
