@@ -55,3 +55,12 @@ export function chipFromSection(section: Section) {
 
   return Chip({ text: name, bgColor: color });
 }
+
+export function chipFromCategory(catID: number) {
+  if (Object.values(Section).includes(catID)) {
+    return chipFromSection(catID as Section);
+  }
+
+  // TODO: fetch category name and color from API if not in Section enum
+  return null;
+}

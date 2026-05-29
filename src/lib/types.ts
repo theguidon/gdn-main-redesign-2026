@@ -12,12 +12,12 @@ export interface Article {
 }
 
 export type ArticleSummary = Omit<Article, "content">;
-export enum Sections {
-  NEWS,
-  OPINION,
-  SPORTS,
-  BEYONDLOYOLA,
-  FEATURES,
-  INQUIRY,
-  SCITECH,
+export enum Section {
+  NEWS = 3,
+  OPINION = 5,
+  SPORTS = 4,
+  BEYONDLOYOLA = 11,
+  FEATURES = 6,
+  INQUIRY = 7,
+  SCITECH = 2005,
 }

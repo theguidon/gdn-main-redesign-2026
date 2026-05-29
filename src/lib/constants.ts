@@ -10,36 +10,36 @@ export const sectionInfo: Record<Section, SectionInfo> = {
   [Section.NEWS]: {
     name: "News",
     slug: "news",
-    color: "--gdn-blue",
+    color: "var(--gdn-blue)",
   },
   [Section.OPINION]: {
     name: "Opinion",
     slug: "opinion",
-    color: "--opinion-gray",
+    color: "var(--opinion-gray)",
   },
   [Section.SPORTS]: {
     name: "Sports",
     slug: "sports",
-    color: "--gdn-blue",
+    color: "var(--gdn-blue)",
   },
   [Section.BEYONDLOYOLA]: {
     name: "Beyond Loyola",
     slug: "bl",
-    color: "--bl-yellow",
+    color: "var(--bl-yellow)",
   },
   [Section.FEATURES]: {
     name: "Features",
     slug: "features",
-    color: "--features-green",
+    color: "var(--features-green)",
   },
   [Section.INQUIRY]: {
     name: "Inquiry",
     slug: "inquiry",
-    color: "--inquiry-red",
+    color: "var(--inquiry-red)",
   },
   [Section.SCITECH]: {
     name: "Science and Technology",
     slug: "scitech",
-    color: "--scitech-blue",
+    color: "var(--scitech-blue)",
   },
 };

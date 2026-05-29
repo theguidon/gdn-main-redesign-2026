@@ -7,7 +7,7 @@ export default function Chip({
 }) {
   return (
     <div
-      className={`px-2 py-1 bg-[${bgColor}] uppercase font-chivo font-bold text-sm`}
+      className={`px-2 py-1 bg-[${bgColor}] uppercase font-chivo font-bold text-white text-md`}
     >
       {text}
     </div>
