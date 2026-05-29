@@ -1,6 +1,6 @@
 import { Section } from "./types";
 
-const BASE_URL = "https://theguidon.com/wp-json/wp/v2";
+export const BASE_URL = "https://theguidon.com/wp-json/wp/v2";
 
 type SectionInfo = {
   name: string;

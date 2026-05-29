@@ -69,6 +69,10 @@ export function chipFromCategory(catID: number) {
   return null;
 }
 
+export function JSONFetcher<T>(url: string): Promise<T> {
+  return fetch(url).then((res) => res.json());
+}
+
 export function WPResponseToArticle(wpRes: WPResponse): Article {
   return {
     id: wpRes.id,
