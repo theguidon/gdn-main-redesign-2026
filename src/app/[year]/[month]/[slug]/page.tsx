@@ -8,7 +8,12 @@ import styles from "@/styles/article.module.css";
 import ArticleCard from "@/components/article-card";
 import { Article } from "@/lib/types";
 import { Spinner } from "@/components/ui/spinner";
-import { bylinesToP, formatDate, printTwoDigit } from "@/lib/utils";
+import {
+  bylinesToP,
+  chipFromCategory,
+  formatDate,
+  printTwoDigit,
+} from "@/lib/utils";
 import { redirect } from "next/navigation";
 
 function OtherArticleSection({
@@ -113,6 +118,7 @@ export default function ArticlePage({
     const photographer =
       articleData[0].yoast_head_json.schema["@graph"][2].captionarticle;
     const date = new Date(articleData[0].date);
+    const categories = articleData[0].categories;
 
     if (
       printTwoDigit(date.getMonth() + 1) !== month ||
@@ -124,7 +130,11 @@ export default function ArticlePage({
     }
     return (
       <main className="flex flex-col flex-nowrap items-stretch py-8 px-[20%]">
-        <section></section>
+        <section className="flex flex-row gap-2 pb-2">
+          {categories.map((catID: number) => (
+            <div key={catID}>{chipFromCategory(catID)}</div>
+          ))}
+        </section>
         <section className="pb-4 pt-6 border-y border-black flex flex-col">
           <h1 className="font-tiempos-headline text-5xl font-bold text-[#101212]">
             {articleData[0].title.rendered}

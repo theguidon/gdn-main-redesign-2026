@@ -1,6 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import dayjs from "dayjs";
+import { Section } from "./types";
+import { sectionInfo } from "./constants";
+import Chip from "@/components/chip";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -45,4 +48,19 @@ export function formatDate(date: Date) {
     timeString +
     "</span>"
   );
+}
+
+export function chipFromSection(section: Section) {
+  const { name, color } = sectionInfo[section];
+
+  return Chip({ text: name, bgColor: color });
+}
+
+export function chipFromCategory(catID: number) {
+  if (Object.values(Section).includes(catID)) {
+    return chipFromSection(catID as Section);
+  }
+
+  // TODO: fetch category name and color from API if not in Section enum
+  return null;
 }
