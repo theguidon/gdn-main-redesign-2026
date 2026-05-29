@@ -131,7 +131,9 @@ export default function ArticlePage({
     return (
       <main className="flex flex-col flex-nowrap items-stretch py-8 px-[20%]">
         <section className="flex flex-row gap-2 pb-2">
-          {categories.map((catID: number) => chipFromCategory(catID))}
+          {categories.map((catID: number) => (
+            <div key={catID}>{chipFromCategory(catID)}</div>
+          ))}
         </section>
         <section className="pb-4 pt-6 border-y border-black flex flex-col">
           <h1 className="font-tiempos-headline text-5xl font-bold text-[#101212]">
