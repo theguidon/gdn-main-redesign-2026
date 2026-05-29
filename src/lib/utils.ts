@@ -40,7 +40,7 @@ export function printTwoDigit(num: number) {
 
 export function formatDate(date: Date) {
   const dateString = dayjs(date).format("MMMM D YYYY");
-  const timeString = dayjs(date).format("H:mm A");
+  const timeString = dayjs(date).format("hh:mm A");
   return (
     "Published <span class='font-bold'>" +
     dateString +
