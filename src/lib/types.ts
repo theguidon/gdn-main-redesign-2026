@@ -8,6 +8,7 @@ export interface Article {
   authors: string[];
   pubDate: Date;
   categories: string[];
+  slug: string;
   [key: string]: unknown;
 }
 
