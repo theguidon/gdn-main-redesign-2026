@@ -50,6 +50,10 @@ export function formatDate(date: Date) {
   );
 }
 
+export function pubDateLink(date: Date) {
+  return dayjs(date).format("YYYY/MM");
+}
+
 export function chipFromSection(section: Section) {
   const { name, color } = sectionInfo[section];
 

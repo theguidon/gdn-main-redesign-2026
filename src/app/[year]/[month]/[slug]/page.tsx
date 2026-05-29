@@ -51,6 +51,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 interface WPResponse {
   title: { rendered: string };
   authors: { display_name: string; [author_k: string]: unknown }[];
+  slug: string;
   featured_image_url: string;
   date: string;
   excerpt: { rendered: string; [excerpt_k: string]: unknown };
@@ -212,6 +213,7 @@ export default function ArticlePage({
               featured_image_url: article.featured_image_url,
               featured_image_caption:
                 article.yoast_head_json.schema["@graph"][2].caption,
+              slug: article.slug,
             }))}
             isLoading={isRelatedArticlesLoading}
           />
@@ -230,6 +232,7 @@ export default function ArticlePage({
               featured_image_url: article.featured_image_url,
               featured_image_caption:
                 article.yoast_head_json.schema["@graph"][2].caption,
+              slug: article.slug,
             }))}
             isLoading={isOtherArticlesLoading}
           />
