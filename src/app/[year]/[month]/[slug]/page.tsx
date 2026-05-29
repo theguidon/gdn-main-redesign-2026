@@ -3,6 +3,7 @@
 import Image from "next/image";
 import useSWR from "swr";
 import { use } from "react";
+import { WPResponse } from "@/lib/types";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import styles from "@/styles/article.module.css";
 import ArticleCard from "@/components/article-card";
@@ -47,26 +48,6 @@ function OtherArticleSection({
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
-
-interface WPResponse {
-  title: { rendered: string };
-  authors: { display_name: string; [author_k: string]: unknown }[];
-  slug: string;
-  featured_image_url: string;
-  date: string;
-  excerpt: { rendered: string; [excerpt_k: string]: unknown };
-  yoast_head_json: {
-    og_description: string;
-    schema: {
-      "@graph": {
-        2: { caption: string; [graph_k: string]: unknown };
-      };
-      [schema_k: string]: unknown;
-    };
-    [yoast_k: string]: unknown;
-  };
-  [res_k: string]: unknown;
-}
 
 export default function ArticlePage({
   params,
