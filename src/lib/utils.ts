@@ -1,7 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import dayjs from "dayjs";
-import { Section } from "./types";
+import { Section, WPResponse, Article } from "./types";
 import { sectionInfo } from "./constants";
 import Chip from "@/components/chip";
 
@@ -67,4 +67,18 @@ export function chipFromCategory(catID: number) {
 
   // TODO: fetch category name and color from API if not in Section enum
   return null;
+}
+
+export function WPResponseToArticle(wpRes: WPResponse): Article {
+  return {
+    id: wpRes.id,
+    categories: wpRes.categories,
+    title: wpRes.title.rendered,
+    pubDate: new Date(wpRes.date),
+    excerpt: wpRes.yoast_head_json.og_description,
+    authors: wpRes.authors.map((author) => author.display_name),
+    featured_image_url: wpRes.featured_image_url,
+    featured_image_caption: wpRes.yoast_head_json.schema["@graph"][2].caption,
+    slug: wpRes.slug,
+  };
 }

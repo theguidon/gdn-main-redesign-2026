@@ -7,15 +7,17 @@ export interface Article {
   content?: string;
   authors: string[];
   pubDate: Date;
-  categories: string[];
+  categories: number[];
   slug: string;
   [key: string]: unknown;
 }
 
 export interface WPResponse {
+  id: number;
   title: { rendered: string };
   authors: { display_name: string; [author_k: string]: unknown }[];
   slug: string;
+  categories: number[];
   featured_image_url: string;
   date: string;
   excerpt: { rendered: string; [excerpt_k: string]: unknown };
