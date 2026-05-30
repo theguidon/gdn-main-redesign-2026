@@ -1,5 +1,7 @@
 import { Section } from "./types";
 
+export const BASE_URL = "https://theguidon.com/wp-json/wp/v2";
+
 type SectionInfo = {
   name: string;
   slug: string;

@@ -7,9 +7,31 @@ export interface Article {
   content?: string;
   authors: string[];
   pubDate: Date;
-  categories: string[];
+  categories: number[];
   slug: string;
   [key: string]: unknown;
+}
+
+export interface WPResponse {
+  id: number;
+  title: { rendered: string };
+  authors: { display_name: string; [author_k: string]: unknown }[];
+  slug: string;
+  categories: number[];
+  featured_image_url: string;
+  date: string;
+  excerpt: { rendered: string; [excerpt_k: string]: unknown };
+  yoast_head_json: {
+    og_description: string;
+    schema: {
+      "@graph": {
+        2: { caption: string; [graph_k: string]: unknown };
+      };
+      [schema_k: string]: unknown;
+    };
+    [yoast_k: string]: unknown;
+  };
+  [res_k: string]: unknown;
 }
 
 export type ArticleSummary = Omit<Article, "content">;
