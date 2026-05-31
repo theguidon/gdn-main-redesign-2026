@@ -37,7 +37,7 @@ export const sectionInfo: Record<Section, SectionInfo> = {
   [Section.INQUIRY]: {
     name: "Inquiry",
     slug: "inquiry",
-    color: "var(--inquiry-red)",
+    color: "--inquiry-red",
   },
   [Section.SCITECH]: {
     name: "Science and Technology",
