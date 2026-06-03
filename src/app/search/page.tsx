@@ -46,21 +46,15 @@ export default function SearchPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-6 py-6" id="ArticleGrid">
-          <div className="w-xl">
-            <ArticleCard article={article}></ArticleCard>
-          </div>
-          <div className="w-xl">
-            <ArticleCard article={article}></ArticleCard>
-          </div>
-          <div className="w-xl">
-            <ArticleCard article={article}></ArticleCard>
-          </div>
-          <div className="w-xl">
-            <ArticleCard article={article}></ArticleCard>
-          </div>
+          <ArticleCard article={article}></ArticleCard>
+          <ArticleCard article={article}></ArticleCard>
+          <ArticleCard article={article}></ArticleCard>
+          <ArticleCard article={article}></ArticleCard>
         </div>
 
-        <Button>Load More Results</Button>
+        <Button className="bg-[#6A91CD] rounded-xs text-white px-4 py-2 font-chivo font-bold text-sm">
+          Load More Results
+        </Button>
       </div>
     </main>
   );
