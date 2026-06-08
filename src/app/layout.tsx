@@ -1,6 +1,5 @@
 import TitleLine from "../components/title-line.tsx";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { MenuIcon, SearchIcon } from "lucide-react";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import {
@@ -26,6 +25,7 @@ import {
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import SideBar from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: "The GUIDON",
@@ -60,7 +60,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <header className="w-full h-[116px] py-4 px-12 bg-[#1c4480] text-white flex flex-col items-center font-chivo">
           <section className="w-full flex flex-nowrap justify-between items-center h-min">
-            <MenuIcon />
+            <SideBar />
             <Image
               src="/GUIDON_Logo.svg"
               width={320}
