@@ -43,7 +43,7 @@ export default function SideBar() {
         </button>
       </DrawerTrigger>
 
-      <DrawerContent className="w-[30vw] border-none h-full top-0 left-0 rounded-none flex flex-col p-0 overflow-clip items-stretch">
+      <DrawerContent className="w-[30vw] border-none h-screen top-0 left-0 rounded-none flex flex-col p-0 overflow-clip items-stretch">
         <DrawerTitle className="hidden">Sidebar</DrawerTitle>
         {/* Top blue section: close button, logo, search */}
         <section className="bg-[#1c4480] text-white flex flex-col px-6 py-5 gap-4 w-full">
