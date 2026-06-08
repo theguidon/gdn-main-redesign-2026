@@ -1,3 +1,4 @@
+import TitleLine from "../components/title-line.tsx";
 import type { Metadata } from "next";
 import { MenuIcon, SearchIcon } from "lucide-react";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
@@ -11,6 +12,7 @@ import {
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -23,6 +25,7 @@ import {
 import { Field } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import SideBar from "@/components/sidebar";
 
 export const metadata: Metadata = {
   title: "The GUIDON",
@@ -57,7 +60,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <header className="w-full h-[116px] py-4 px-12 bg-[#1c4480] text-white flex flex-col items-center font-chivo">
           <section className="w-full flex flex-nowrap justify-between items-center h-min">
-            <MenuIcon />
+            <SideBar />
             <Image
               src="/GUIDON_Logo.svg"
               width={320}
@@ -145,6 +148,68 @@ export default function RootLayout({
           </NavigationMenu>
         </header>
         {children}
+        <section className="w-full flex flex-col md:flex-row md:px-[10%] md:pt-10 font-chivo">
+          <form className="basis-3/5 flex flex-col gap-3 bg-(--light-gray) p-6 md:shadow-[0_0_4px_2px_rgba(0,0,0,0.16)]">
+            <TitleLine title={"Tell Us What You Think!"} />
+            <p className="text-md text-(--alt-black) font-tiempos-headline">
+              Have any questions, clarifications, or comments? Send us a message
+              through the form below.
+            </p>
+            <section className="flex flex-col gap-4 flex-1">
+              <div className="flex flex-col gap-1">
+                <label
+                  htmlFor="contact-email"
+                  className="text-sm font-bold font-(--opinion-gray) font-roboto"
+                >
+                  Email:
+                </label>
+                <Input
+                  id="contact-email"
+                  type="email"
+                  placeholder="Email"
+                  className="bg-white text-gray-500"
+                />
+              </div>
+              <div className="flex flex-col gap-1 flex-1">
+                <label
+                  htmlFor="contact-message"
+                  className="text-sm font-bold font-(--opinion-gray) font-roboto"
+                >
+                  Message:
+                </label>
+                <textarea
+                  id="contact-message"
+                  placeholder="Message"
+                  className="flex-1 w-full bg-white text-gray-500 p-2 text-sm resize-none min-h-[80px]"
+                />
+              </div>
+              <div>
+                <Button
+                  variant="default"
+                  className="bg-(--graphic-design-blue) text-white font-bold p-4 rounded-sm"
+                >
+                  Send
+                </Button>
+              </div>
+            </section>
+          </form>
+          <section className="basis-2/5 flex flex-col gap-3 bg-white p-6 md:shadow-[0_0_4px_2px_rgba(0,0,0,0.16)]">
+            <TitleLine title={"Take the Lede"} />
+            <p className="text-md font-tiempos-headline text-(--alt-black) flex-1">
+              Fill out our form in the Contribute page and write for The GUIDON!
+              Click the button below to view our Take the Lede Crowdsourcing
+              Form.
+            </p>
+            <div>
+              <Button
+                variant="default"
+                className="bg-(--graphic-design-blue) text-white font-bold p-4 rounded-sm"
+              >
+                Contribute
+              </Button>
+            </div>
+          </section>
+        </section>
         <footer className="w-full flex flex-col items-stretch md:grid md:grid-cols-3 md:grid-rows-1 justify-items-center md:gap-4 lg:gap-16 pb-8 pt-12 px-6 md:px-8 lg:px-12 bg-[#1c4480] text-white">
           <section>
             <section className="w-full pb-4 border-white border-b mb-4 md:mb-0">
@@ -162,7 +227,7 @@ export default function RootLayout({
             <p className="w-full pt-5 hidden md:block">
               © 2026 The GUIDON All Rights Reserved
               <br />
-              Designed and Developed by Digital Development 2025–2026
+              Designed and Developed by Digital Deve/lopment 2025–2026
             </p>
           </section>
           <section className="flex flex-wrap gap-8 mb-4 md:mb-0 border-white border-b pb-2 md:p-0 md:border-none">
@@ -171,34 +236,34 @@ export default function RootLayout({
                 <p className="font-bold">Browse</p>
               </li>
               <li>
-                <a href="/beyond-loyola">
+                <Link href="/sections/beyond-loyola">
                   <p>Beyond Loyola</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/opinion">
+                <Link href="/sections/opinion">
                   <p>Opinion</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/sports">
+                <Link href="/sections/sports">
                   <p>Sports</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/features">
+                <Link href="/sections/features">
                   <p>Features</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/inquiry">
+                <Link href="/sections/inquiry">
                   <p>Inquiry</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/scitech">
+                <Link href="/sections/scitech">
                   <p>SciTech</p>
-                </a>
+                </Link>
               </li>
             </ul>
             <ul>
@@ -206,34 +271,34 @@ export default function RootLayout({
                 <p className="font-bold">More</p>
               </li>
               <li>
-                <a href="/vantage-magazine">
+                <Link href="/vantage-magazine">
                   <p>Vantage Magazine</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/multimedia">
+                <Link href="/multimedia">
                   <p>Multimedia</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/interactives">
+                <Link href="/interactives">
                   <p>Interactives</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/archives">
+                <Link href="/archives">
                   <p>Archives</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/take-the-lede">
+                <Link href="/take-the-lede">
                   <p>Take the Lede</p>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="/about">
+                <Link href="/about">
                   <p>About</p>
-                </a>
+                </Link>
               </li>
             </ul>
           </section>
@@ -262,15 +327,15 @@ export default function RootLayout({
             <section>
               <p>Follow The GUIDON on:</p>
               <section className="flex flex-nowrap gap-4 mt-2 text-2xl">
-                <a href="www.facebook.com/TheGUIDON">
+                <Link href="www.facebook.com/TheGUIDON">
                   <FaFacebook color="white" />
-                </a>
-                <a href="www.twitter.com/TheGUIDON">
+                </Link>
+                <Link href="www.twitter.com/TheGUIDON">
                   <FaXTwitter color="white" />
-                </a>
-                <a href="www.instagram.com/TheGUIDON">
+                </Link>
+                <Link href="www.instagram.com/TheGUIDON">
                   <FaInstagram color="white" />
-                </a>
+                </Link>
               </section>
             </section>
           </section>
