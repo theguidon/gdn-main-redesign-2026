@@ -1,5 +1,6 @@
 import TitleLine from "../components/title-line.tsx";
-import type { Metadata, Link } from "next";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { MenuIcon, SearchIcon } from "lucide-react";
 import { FaFacebook, FaXTwitter, FaInstagram } from "react-icons/fa6";
 import {
@@ -234,32 +235,32 @@ export default function RootLayout({
                 <p className="font-bold">Browse</p>
               </li>
               <li>
-                <Link href="/beyond-loyola">
+                <Link href="/sections/beyond-loyola">
                   <p>Beyond Loyola</p>
                 </Link>
               </li>
               <li>
-                <Link href="/opinion">
+                <Link href="/sections/opinion">
                   <p>Opinion</p>
                 </Link>
               </li>
               <li>
-                <Link href="/sports">
+                <Link href="/sections/sports">
                   <p>Sports</p>
                 </Link>
               </li>
               <li>
-                <Link href="/features">
+                <Link href="/sections/features">
                   <p>Features</p>
                 </Link>
               </li>
               <li>
-                <Link href="/inquiry">
+                <Link href="/sections/inquiry">
                   <p>Inquiry</p>
                 </Link>
               </li>
               <li>
-                <Link href="/scitech">
+                <Link href="/sections/scitech">
                   <p>SciTech</p>
                 </Link>
               </li>
