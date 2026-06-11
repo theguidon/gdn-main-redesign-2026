@@ -1,6 +1,9 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import dayjs from "dayjs";
+import { Section, WPResponse, Article } from "./types";
+import { sectionInfo } from "./constants";
+import Chip from "@/components/chip";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -37,7 +40,7 @@ export function printTwoDigit(num: number) {
 
 export function formatDate(date: Date) {
   const dateString = dayjs(date).format("MMMM D YYYY");
-  const timeString = dayjs(date).format("H:mm A");
+  const timeString = dayjs(date).format("hh:mm A");
   return (
     "Published <span class='font-bold'>" +
     dateString +
@@ -45,4 +48,41 @@ export function formatDate(date: Date) {
     timeString +
     "</span>"
   );
+}
+
+export function pubDateLink(date: Date) {
+  return dayjs(date).format("YYYY/MM");
+}
+
+export function chipFromSection(section: Section) {
+  const { name, color } = sectionInfo[section];
+
+  return Chip({ text: name, bgColor: color });
+}
+
+export function chipFromCategory(catID: number) {
+  if (Object.values(Section).includes(catID)) {
+    return chipFromSection(catID as Section);
+  }
+
+  // TODO: fetch category name and color from API if not in Section enum
+  return null;
+}
+
+export function JSONFetcher<T>(url: string): Promise<T> {
+  return fetch(url).then((res) => res.json());
+}
+
+export function WPResponseToArticle(wpRes: WPResponse): Article {
+  return {
+    id: wpRes.id,
+    categories: wpRes.categories,
+    title: wpRes.title.rendered,
+    pubDate: new Date(wpRes.date),
+    excerpt: wpRes.yoast_head_json.og_description,
+    authors: wpRes.authors.map((author) => author.display_name),
+    featured_image_url: wpRes.featured_image_url,
+    featured_image_caption: wpRes.yoast_head_json.schema["@graph"][2].caption,
+    slug: wpRes.slug,
+  };
 }

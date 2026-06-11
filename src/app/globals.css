@@ -4,7 +4,46 @@
 
 @custom-variant dark (&:is(.dark *));
 
+* {
+  --gdn-blue: #1c4480;
+  --solid-white: #ffffff;
+  --off-white: #faf9f6;
+  --light-gray: #e9e6e3;
+  --gray: #898989;
+  --opinion-gray: #4c4c4e;
+  --alt-black: #101212;
+
+  --inquiry-red: #8f181b;
+  --bl-yellow: #d4b835;
+  --features-green: #009c85;
+  --vantage-magazine-purple: #5e61ba;
+  --broadcast-news-orange: #f09724;
+  --scitech-blue: #09a1f6;
+  --graphic-design-blue: #6891cd;
+  --photos-yellow: #e4bb4e;
+  --video-production-red: #dc676a;
+  --digital-development-green: #5ebc91;
+}
+
 @theme inline {
+  --gdn-blue: var(--gdn-blue);
+  --solid-white: var(--solid-white);
+  --off-white: var(--off-white);
+  --light-gray: var(--light-gray);
+  --gray: var(--gray);
+  --color-opinion-gray: var(--opinion-gray);
+  --color-alt-black: var(--alt-black);
+
+  --color-inquiry-red: var(--inquiry-red);
+  --color-bl-yellow: var(--bl-yellow);
+  --color-features-green: var(--features-green);
+  --color-vantage-magazine-purple: var(--vantage-magazine-purple);
+  --color-broadcast-news-orange: var(--broadcast-news-orange);
+  --color-scitech-blue: var(--scitech-blue);
+  --color-graphic-design-blue: var(--graphic-design-blue);
+  --color-photos-yellow: var(--photos-yellow);
+  --color-video-production-red: var(--video-production-red);
+  --color-digital-development-green: var(--digital-development-green);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);

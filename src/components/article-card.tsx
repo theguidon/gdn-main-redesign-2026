@@ -1,5 +1,5 @@
 import { Article } from "@/lib/types";
-import { bylinesToP, formatDate } from "@/lib/utils";
+import { bylinesToP, formatDate, pubDateLink } from "@/lib/utils";
 import Image from "next/image";
 
 export default function ArticleCard({ article }: { article: Article }) {
@@ -14,9 +14,14 @@ export default function ArticleCard({ article }: { article: Article }) {
         className="w-full my-4 h-[200px] object-cover"
       />
       <section>
-        <h2 className="font-tiempos-headline text-2xl font-bold mb-5">
-          {article.title}
-        </h2>
+        <a
+          href={`/${pubDateLink(article.pubDate)}/${article.slug}`}
+          className="no-underline"
+        >
+          <h2 className="font-tiempos-headline text-2xl font-bold mb-5">
+            {article.title}
+          </h2>
+        </a>
         <p
           className="uppercase text-sm my-4"
           dangerouslySetInnerHTML={{ __html: bylinesToP(article.authors) }}
