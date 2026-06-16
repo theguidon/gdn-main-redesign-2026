@@ -148,8 +148,8 @@ export default function RootLayout({
           </NavigationMenu>
         </header>
         {children}
-        <section className="w-full flex flex-col md:flex-row md:px-[10%] md:pt-10 font-chivo">
-          <form className="basis-3/5 flex flex-col gap-3 bg-(--light-gray) p-6 md:shadow-[0_0_4px_2px_rgba(0,0,0,0.16)]">
+        <section className="w-full flex flex-col md:flex-row md:items-end md:px-[10%] md:pt-10 font-chivo">
+          <form className="basis-3/5 flex flex-col gap-3 bg-(--light-gray) p-6 border border-black/10 md:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.2)]">
             <TitleLine title={"Tell Us What You Think!"} />
             <p className="text-md text-(--alt-black) font-tiempos-headline">
               Have any questions, clarifications, or comments? Send us a message
@@ -193,9 +193,9 @@ export default function RootLayout({
               </div>
             </section>
           </form>
-          <section className="basis-2/5 flex flex-col gap-3 bg-white p-6 md:shadow-[0_0_4px_2px_rgba(0,0,0,0.16)]">
+          <section className="basis-2/5 flex flex-col gap-3 bg-white p-6 border border-black/10 md:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.2)]">
             <TitleLine title={"Take the Lede"} />
-            <p className="text-md font-tiempos-headline text-(--alt-black) flex-1">
+            <p className="text-md font-tiempos-headline text-(--alt-black)">
               Fill out our form in the Contribute page and write for The GUIDON!
               Click the button below to view our Take the Lede Crowdsourcing
               Form.
