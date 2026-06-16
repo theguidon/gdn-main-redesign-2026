@@ -4,7 +4,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-* {
+:root * {
   --gdn-blue: #1c4480;
   --solid-white: #ffffff;
   --off-white: #faf9f6;
@@ -31,6 +31,24 @@
   --off-white: var(--off-white);
   --light-gray: var(--light-gray);
   --gray: var(--gray);
+  --opinion-gray: var(--opinion-gray);
+  --alt-black: var(--alt-black);
+
+  --inquiry-red: var(--inquiry-red);
+  --bl-yellow: var(--bl-yellow);
+  --features-green: var(--features-green);
+  --vantage-magazine-purple: var(--vantage-magazine-purple);
+  --broadcast-news-orange: var(--broadcast-news-orange);
+  --scitech-blue: var(--scitech-blue);
+  --graphic-design-blue: var(--graphic-design-blue);
+  --photos-yellow: var(--photos-yellow);
+  --video-production-red: var(--video-production-red);
+  --digital-development-green: var(--digital-development-green);
+  --color-gdn-blue: var(--gdn-blue);
+  --color-solid-white: var(--solid-white);
+  --color-off-white: var(--off-white);
+  --color-light-gray: var(--light-gray);
+  --color-gray: var(--gray);
   --color-opinion-gray: var(--opinion-gray);
   --color-alt-black: var(--alt-black);
 
