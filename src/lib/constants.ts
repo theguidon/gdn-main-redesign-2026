@@ -2,6 +2,9 @@ import { Section } from "./types";
 
 export const BASE_URL = "https://theguidon.com/wp-json/wp/v2";
 
+export const TOP_POSTS_URL =
+  "https://theguidon.com/wp-json/wordpress-popular-posts/v1/popular-posts";
+
 type SectionInfo = {
   name: string;
   slug: string;
@@ -37,7 +40,7 @@ export const sectionInfo: Record<Section, SectionInfo> = {
   [Section.INQUIRY]: {
     name: "Inquiry",
     slug: "inquiry",
-    color: "--inquiry-red",
+    color: "var(--inquiry-red)",
   },
   [Section.SCITECH]: {
     name: "Science and Technology",

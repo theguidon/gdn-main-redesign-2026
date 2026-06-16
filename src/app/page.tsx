@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { BASE_URL } from "@/lib/constants";
+import { BASE_URL, TOP_POSTS_URL } from "@/lib/constants";
 import {
   WPResponseToArticle,
   bylinesToP,
@@ -8,6 +8,25 @@ import {
 } from "@/lib/utils";
 import TitleLine from "@/components/title-line";
 import { Article, WPResponse } from "@/lib/types";
+
+function TopStoryRow({ article }: { article: Article }) {
+  return (
+    <section className="my-4">
+      <section className="flex flex-row gap-2 my-1">
+        {article.categories.map(chipFromCategory)}
+      </section>
+      <h1 className="font-tiempos-headline font-bold text-lg">
+        {article.title}
+      </h1>
+      <p
+        className="p-0 m-0 uppercase"
+        dangerouslySetInnerHTML={{
+          __html: bylinesToP(article.authors),
+        }}
+      />
+    </section>
+  );
+}
 
 function ArticleRow({ article }: { article: Article }) {
   return (
@@ -20,7 +39,7 @@ function ArticleRow({ article }: { article: Article }) {
         height={243}
       />
       <section>
-        <section>
+        <section className="my-2 flex flex-row gap-2 p-0">
           {article.categories.map((catID: number) => (
             <div key={catID}>{chipFromCategory(catID)}</div>
           ))}
@@ -44,7 +63,11 @@ export default async function Home() {
   const fetchData = await fetch(`${BASE_URL}/posts?per_page=4`).then((res) =>
     res.json(),
   );
+  const fetchTopStories = await fetch(TOP_POSTS_URL).then((res) => res.json());
   const latestArticles: Article[] = (fetchData as WPResponse[]).map(
+    WPResponseToArticle,
+  );
+  const topStories: Article[] = (fetchTopStories as WPResponse[]).map(
     WPResponseToArticle,
   );
 
@@ -93,8 +116,15 @@ export default async function Home() {
             <ArticleRow article={article} key={article.id} />
           ))}
         </section>
-        <section className={"w-3/5 py-4 px-4 bg-light-gray"}>
+        <section className={"w-1/2 py-4 px-4 bg-(--light-gray)"}>
           <TitleLine title={"Top Stories"} />
+          <ol className="marker:text-(--opinion-gray)">
+            {topStories.map((article) => (
+              <li key={article.id}>
+                <TopStoryRow article={article} />
+              </li>
+            ))}
+          </ol>
         </section>
       </section>
     </main>
